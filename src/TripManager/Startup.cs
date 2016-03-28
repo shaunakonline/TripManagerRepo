@@ -20,12 +20,13 @@ namespace TripManager
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            app.UseIISPlatformHandler();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync($"Hello World! path {context.Request.Path}");
+            //});
         }
 
         // Entry point for the application.
