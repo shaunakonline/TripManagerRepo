@@ -3,27 +3,49 @@
 <head>
     <title>Trip Manager</title>
     <meta charset="utf-8" />
+    <link href="css/site.css" rel="stylesheet" />
+     
 </head>
 <body>
-    <div>
-        <h1>Trip Manager</h1>
-        <p>starting new website</p>
-
-        <form>
-            <div>
-                <label> Date</label>
-                <input />
-            </div>
-            <div>
-                <label> Location</label>
-                <input />
-            </div>
-            <div> <input type="submit" value="Add" /></div>
-        </form>
+    <div id="sidebar">
+        
+        <img src="img/images.jpg" alt="Jon Snow Thumb" class="headshot"/>
+        <span id="username"> Jon Snow</span>
+        <ul class="menu">
+            <li class="active"><a herf="#">Home</a></li>
+            <li><a herf="#">About</a></li>
+            <li><a herf="#">Contact</a></li>
+        </ul>
 
     </div>
-    <div>
-        &copy; 2016 https://github.com/shaunakonline
+
+    <div id="wrapper">
+        <div>
+            <button id="sidebarToggle">Toggle Menu</button>
+        </div>
+        <div id="main">
+            <h1>Trip Manager</h1>
+            <p>starting new website</p>
+
+            <form>
+                <div>
+                    <label> Date</label>
+                    <input />
+                </div>
+                <div>
+                    <label> Location</label>
+                    <input />
+                </div>
+                <div> <input type="submit" value="Add" /></div>
+            </form>
+
+        </div>
+        <div id="footer">
+            &copy; 2016 https://github.com/shaunakonline
+        </div>
     </div>
+
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="js/site.js"></script>
 </body>
 </html>
