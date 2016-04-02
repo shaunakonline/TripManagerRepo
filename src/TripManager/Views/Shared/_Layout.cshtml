@@ -1,0 +1,42 @@
+﻿ 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trip Manager - @ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="sidebar">
+
+        <img src="~/img/images.jpg" alt="Jon Snow Thumb" class="headshot" />
+        <span id="username"> Jon Snow</span>
+        <ul class="menu">
+            <li class="active"><a  asp-controller="App" asp-action="Index">Home</a></li>
+            <li><a asp-controller="App" asp-action="About">About</a></li>
+            <li><a  asp-controller="App" asp-action="Contact">Contact</a></li>
+        </ul>
+
+    </div>
+
+    <div id="wrapper">
+        <div>
+            <button id="sidebarToggle">Toggle Menu</button>
+        </div>
+        <div id="main">
+
+            <div>
+                @RenderBody()
+        </div>
+
+    </div>
+    <div id="footer">
+        &copy; 2016 https://github.com/shaunakonline
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/site.js"></script>
+</body>
+</html>
