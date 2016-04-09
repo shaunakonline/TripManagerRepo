@@ -1,5 +1,8 @@
 {
   "AppSettings": {
     "SiteEmailAddress": "shaunaky@gmail.com"
+  },
+  "Data": {
+    "WorldContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=TheWorldDB;Trusted_Connection=true;MultipleActiveResultSets=true;"
   }
 }

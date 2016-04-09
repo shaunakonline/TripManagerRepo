@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
-using Microsoft.Extensions.DependencyInjection;
-using TripManager.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using TripManager.Services;
+using TripManager.Models;
+using Microsoft.Extensions.Logging;
 
 namespace TripManager
 {
@@ -32,18 +34,28 @@ namespace TripManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddLogging();
 
-            #if DEBUG
-                        services.AddScoped<IMailService, DebugMailService>();
-            #else
+            services.AddEntityFramework()
+              .AddSqlServer()
+               .AddDbContext<WorldContext>();
+
+            services.AddTransient<WorldContextSeedData>();
+            services.AddScoped<IWorldRepository, WorldRepository>();
+
+
+#if DEBUG
+            services.AddScoped<IMailService, DebugMailService>();
+#else
                   services.AddScoped<IMailService, MailService>();
-            #endif
+#endif
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddDebug(LogLevel.Error);
             app.UseStaticFiles();
             app.UseMvc(config =>
             {
@@ -53,6 +65,7 @@ namespace TripManager
                     defaults: new { controller = "App", action = "Index" }
                     );
             });
+            seeder.EnsureSeedData();
 
         }
 

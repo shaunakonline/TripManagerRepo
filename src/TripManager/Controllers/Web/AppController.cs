@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TripManager.Services;
 using TripManager.ViewModels;
+using TripManager.Models;
 
 namespace TripManager.Controllers.Web
 {
@@ -13,14 +14,19 @@ namespace TripManager.Controllers.Web
     {
         private IMailService _mailService;
 
-        public AppController(IMailService service)
+        private IWorldRepository _repository;
+
+        public AppController(IMailService service, IWorldRepository repository)
         {
             _mailService = service;
+            _repository = repository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var trips = _repository.GetAllTrips();
+
+            return View(trips);
         }
 
         public IActionResult About()
