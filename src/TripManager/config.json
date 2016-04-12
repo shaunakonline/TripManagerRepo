@@ -1,6 +1,7 @@
 {
   "AppSettings": {
-    "SiteEmailAddress": "shaunaky@gmail.com"
+    "SiteEmailAddress": "shaunaky@gmail.com",
+    "BingKey":  "DontHardCodeTheKey"
   },
   "Data": {
     "WorldContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=TheWorldDB;Trusted_Connection=true;MultipleActiveResultSets=true;"

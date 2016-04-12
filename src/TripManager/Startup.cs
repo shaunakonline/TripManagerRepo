@@ -11,6 +11,9 @@ using Microsoft.Extensions.PlatformAbstractions;
 using TripManager.Services;
 using TripManager.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using TripManager.ViewModels;
 
 namespace TripManager
 {
@@ -33,13 +36,16 @@ namespace TripManager
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(opt => {
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
             services.AddLogging();
 
             services.AddEntityFramework()
               .AddSqlServer()
                .AddDbContext<WorldContext>();
-
+            services.AddScoped<CoordService>();
             services.AddTransient<WorldContextSeedData>();
             services.AddScoped<IWorldRepository, WorldRepository>();
 
@@ -56,6 +62,12 @@ namespace TripManager
         public void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddDebug(LogLevel.Error);
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Trip, TripViewModel>().ReverseMap();
+                config.CreateMap<Stop, StopViewModel>().ReverseMap();
+            });
+
             app.UseStaticFiles();
             app.UseMvc(config =>
             {
