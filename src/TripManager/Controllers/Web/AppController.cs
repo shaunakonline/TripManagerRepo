@@ -24,11 +24,15 @@ namespace TripManager.Controllers.Web
 
         public IActionResult Index()
         {
+            return View();
+        }
+        
+        public IActionResult Trips()
+        {
             var trips = _repository.GetAllTrips();
 
             return View(trips);
         }
-
         public IActionResult About()
         {
             return View();
